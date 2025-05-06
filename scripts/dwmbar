@@ -1,0 +1,26 @@
+#!/bin/sh
+
+time ()
+{
+  date +'%H:%M'
+}
+
+volume ()
+{
+  amixer sget Master | awk -F"[][]" '/Left:/ { print $2 }'
+}
+
+getdate ()
+{
+  date +'%a %b %d' 
+}
+
+battery ()
+{
+  echo "^r0,7,2,4^^r2,3,40,12^^c#000000^^r3,4,38,10^^d^^f45^"
+}
+
+while :; do
+	xsetroot -name "[""$(getdate)""]""[""$(time)""]""$(battery)""[""$(volume)  ""]"
+	sleep 1m
+done
